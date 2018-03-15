@@ -1,6 +1,8 @@
 <template>
-  <div class="col-md-4" @click="onDeleteQuote(quote.id)">
-    <span>{{ quote.text }}</span>
+  <div class="col-md-4">
+    <span>
+      <slot></slot>
+    </span>
   </div>
 </template>
 
@@ -8,15 +10,7 @@
 import { EventBuss } from '../../../plugin/eventBuss.js'
 
 export default {
-  name: 'Quote',
-  props: {
-    quote: Object
-  },
-  methods: {
-    onDeleteQuote(id) {
-      EventBuss.$emit('onDeleteQuote', id)
-    }
-  }
+  name: 'Quote'
 }
 </script>
 

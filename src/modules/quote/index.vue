@@ -4,7 +4,7 @@
 
     <div class="row">
       <div class="col-md-12">
-        <progresse-bar></progresse-bar>
+        <progresse-bar :max-of-quotes="maxOfQuotes" :progress-status="progressStatus"></progresse-bar>
       </div>
     </div>
 
@@ -16,7 +16,7 @@
 
     <div class="row">
       <div class="col-md-12">
-        <quotes></quotes>
+        <quotes-grid :quotes="quotes"></quotes-grid>
       </div>
     </div>
   </section>
@@ -25,13 +25,39 @@
 <script>
 import progresseBar from './_components/progress-bar.vue'
 import quoteWriter from './_components/quote-writer.vue'
-import quotes from './_components/quotes.vue'
+import quotesGrid from './_components/quotes.vue'
+import { EventBuss } from '../../plugin/eventBuss.js'
 
 export default {
   components: {
     progresseBar,
     quoteWriter,
-    quotes
+    quotesGrid
+  },
+  data() {
+    return {
+      quotes: [],
+      progressStatus: 0,
+      maxOfQuotes: 10
+    }
+  },
+  methods: {
+    onAddQuote(newQuote) {
+      if (this.quotes.length < 10) {
+        this.quotes.push(newQuote);
+
+        this.progressStatus = this.quotes.length
+      }
+    },
+    onDeleteQuote(index) {
+      this.quotes.splice(index, 1)
+
+      this.progressStatus = this.quotes.length
+    }
+  },
+  created() {
+    EventBuss.$on('onAddQuote', this.onAddQuote)
+    EventBuss.$on('onDeleteQuote', this.onDeleteQuote)
   }
 }
 </script>

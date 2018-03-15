@@ -1,8 +1,8 @@
 <template>
   <div class="progress-bar-wrapper">
     <div class="progress-bar"
-    :style="{ width: progressStatus + '0%' }">
-      {{ progressStatus }} / 10
+    :style="{ width: progressStatus / maxOfQuotes * 100 + '%' }">
+      {{ progressStatus }} / {{ maxOfQuotes }}
     </div>
   </div>
 </template>
@@ -12,26 +12,13 @@ import { EventBuss } from '../../../plugin/eventBuss.js';
 
 export default {
   name: 'ProgresseBar',
-  data() {
-    return {
-      progressStatus: 0
-    }
-  },
-  methods: {
-    onAddQuote() {
-      if (this.progressStatus < 10) {
-        this.progressStatus += 1;
-      }
+  props: {
+    maxOfQuotes: {
+      type: Number
     },
-    onDeleteQuote() {
-      if (this.progressStatus > 0) {
-        this.progressStatus -= 1;
-      }
+    progressStatus: {
+      type: Number
     }
-  },
-  created() {
-    EventBuss.$on('onAddQuote', this.onAddQuote)
-    EventBuss.$on('onDeleteQuote', this.onDeleteQuote)
   }
 }
 </script>

@@ -1,21 +1,25 @@
 <template>
-  <div class="col-md-offset-2 col-md-8 text-center">
-    <div class="form-group text-left">
-      <h4>Quote</h4>
+  <div class="col-md-offset-2 col-md-8">
+    <form>
+      <div class="form-group">
+        <label>Quote</label>
 
-      <textarea
-      name="quote"
-      rows="5"
-      placeholder="Write your quote"
-      class="form-control"
-      v-model="myQuote"></textarea>
+        <textarea
+        name="quote"
+        rows="5"
+        placeholder="Write your quote"
+        class="form-control"
+        v-model="myQuote"></textarea>
 
-      <span
-      class="error-mensage"
-      v-if="errorMensage">{{ errorMensage }}</span>
-    </div>
+        <span
+        class="error-mensage"
+        v-if="errorMensage">{{ errorMensage }}</span>
+      </div>
 
-    <button type="button" class="btn" @click="onAddQuote(myQuote)">Add quote</button>
+      <div class="col-md-12 text-center">
+        <button type="button" class="btn" @click.prevent="onAddQuote(myQuote)">Add quote</button>
+      </div>
+    </form>
   </div>
 </template>
 
@@ -38,6 +42,7 @@ export default {
         this.errorMensage = null;
 
         EventBuss.$emit('onAddQuote', this.myQuote);
+        this.myQuote = '';
 
       } else {
         this.errorMensage = WRITE_SOME_QUOTE;

@@ -2,12 +2,15 @@
   <div class="quote-group">
     <quote
     v-for="(myQuote, index) in quotes"
-    :quote="{ text: myQuote, id: index }"></quote>
+    @click.native="onDeleteQuote(index)">
+      {{ myQuote }}
+    </quote>
 
     <div class="col-md-12 alert alert-info text-center">
       <strong
       v-if="this.quotes.length === 10">
         Number max of quotes
+        <br>
       </strong>
 
       <small>Click in a quote to delete it</small>
@@ -24,24 +27,15 @@ export default {
   components: {
     quote
   },
-  data() {
-    return {
-      quotes: []
+  props: {
+    quotes: {
+      type: Array
     }
   },
   methods: {
-    onAddQuote(newQuote) {
-      if (this.quotes.length < 10) {
-        this.quotes.push(newQuote);
-      }
-    },
-    onDeleteQuote(index) {
-      this.quotes.splice(index, 1)
+    onDeleteQuote(quoteId) {
+      EventBuss.$emit('onDeleteQuote', quoteId)
     }
-  },
-  created() {
-    EventBuss.$on('onAddQuote', this.onAddQuote)
-    EventBuss.$on('onDeleteQuote', this.onDeleteQuote)
   }
 }
 </script>
