@@ -1,22 +1,23 @@
 <template>
-    <div class="container">
-        <div class="row">
-            <div class="col-xs-12">
-               <quote></quote>
-            </div>
-        </div>
-    </div>
+  <div id="app" class="container-fluid">
+    <app-navbar></app-navbar>
+
+    <router-view/>
+  </div>
 </template>
 
 <script>
-    import Quote from './modules/quote/index.vue'
+import appNavbar from './shared/modules/navbar/_components/navbar.vue'
 
-    export default {
-        components: {
-            Quote
-        }
-    }
+export default {
+  name: "RootApp",
+  components: {
+    appNavbar
+  }
+}
 </script>
 
-<style>
+
+<style lang="scss">
+
 </style>
