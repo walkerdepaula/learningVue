@@ -1,1 +1,22 @@
 node_modules/
+
+.DS_Store
+stocktrader/node_modules
+stocktrader/dist
+
+# local env files
+stocktrader/.env.local
+stocktrader/.env.*.local
+
+# Log files
+stocktrader/npm-debug.log*
+stocktrader/yarn-debug.log*
+stocktrader/yarn-error.log*
+
+# Editor directories and files
+stocktrader/.idea
+stocktrader/.vscode
+stocktrader/*.suo
+stocktrader/*.ntvs*
+stocktrader/*.njsproj
+stocktrader/*.sln
